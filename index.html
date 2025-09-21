@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EarthlyTrack.ng — Real-time Climate & Home Energy Tracker</title>
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <meta name="description" content="EarthlyTrack.ng — track climate indicators, monitor household energy, and get actionable alerts to live greener." />
+  <meta name="theme-color" content="#1b7a41">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>EarthlyTrack<span class="dot">.ng</span></h1>
+      <p class="tag">Track the planet. Act for tomorrow.</p>
+    </div>
+
+    <nav class="top-actions">
+      <input id="locationInput" class="input" placeholder="Enter city, postcode, or use GPS" />
+      <button id="btnLocate" class="btn">Locate</button>
+      <button id="btnSignIn" class="btn alt">Sign in</button>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT: Map & Live Layers -->
+    <section class="pane map-pane" aria-labelledby="mapTitle">
+      <div class="pane-header">
+        <h2 id="mapTitle">Live Map</h2>
+        <div class="layer-controls">
+          <label><input type="checkbox" data-layer="temperature" checked /> Temperature</label>
+          <label><input type="checkbox" data-layer="rainfall" checked /> Rainfall</label>
+          <label><input type="checkbox" data-layer="aqi" /> Air Quality (AQI)</label>
+        </div>
+      </div>
+
+      <div id="map" class="map-placeholder" role="region" aria-label="Live climate map">
+        <div class="map-fallback">
+          <p>Interactive map will appear here. For low-bandwidth connections, check the Overview panel on the right.</p>
+        </div>
+      </div>
+
+      <div class="time-slider">
+        <input id="timeSlider" type="range" min="0" max="72" value="0" />
+        <div class="time-labels">
+          <span id="timeFrom">Now</span>
+          <span id="timeTo">+72h</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Dashboard cards -->
+    <aside class="pane dashboard-pane">
+      <section class="card indicators" aria-labelledby="indicatorsTitle">
+        <h3 id="indicatorsTitle">Overview</h3>
+        <div class="ind-grid">
+          <div class="ind-item">
+            <div class="ind-value" id="tempTrend">— °C</div>
+            <div class="ind-label">Local temp (24h)</div>
+          </div>
+          <div class="ind-item">
+            <div class="ind-value" id="aqiValue">—</div>
+            <div class="ind-label">Air Quality Index</div>
+          </div>
+          <div class="ind-item">
+            <div class="ind-value" id="rainProb">— %</div>
+            <div class="ind-label">Chance of rain (24h)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card energy" aria-labelledby="energyTitle">
+        <h3 id="energyTitle">Household Energy</h3>
+        <div class="energy-body">
+          <p>Current usage: <strong id="curUsage">— kWh</strong></p>
+          <p>Estimated cost: <strong id="curCost">—</strong></p>
+
+          <div class="energy-actions">
+            <button id="btnManualAdd" class="btn small">Add reading</button>
+            <button id="btnConnectDevice" class="btn small alt">Connect monitor</button>
+          </div>
+
+          <div id="energyTips" class="energy-tips">
+            <h4>Tip</h4>
+            <p id="energyTipText">Lower your AC 1°C to save energy.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card habits" aria-labelledby="habitsTitle">
+        <h3 id="habitsTitle">Habits & Challenges</h3>
+        <ul id="habitList" class="habit-list">
+          <li data-habit="biking">
+            <label><input type="checkbox" /> Bike to work</label>
+            <small class="habit-meta">+5 pts</small>
+          </li>
+          <li data-habit="recycling">
+            <label><input type="checkbox" /> Recycle</label>
+            <small class="habit-meta">+2 pts</small>
+          </li>
+          <li data-habit="energy-saving">
+            <label><input type="checkbox" /> Unplug idle devices</label>
+            <small class="habit-meta">+1 pt</small>
+          </li>
+        </ul>
+        <div class="habit-actions">
+          <button id="btnAddHabit" class="btn small">Add habit</button>
+          <button id="btnViewChallenges" class="btn small alt">View challenges</button>
+        </div>
+      </section>
+
+      <section class="card alerts" aria-labelledby="alertsTitle">
+        <h3 id="alertsTitle">Alerts & Warnings</h3>
+        <div id="alertList" class="alert-list">
+          <div class="alert empty">No active alerts.</div>
+        </div>
+      </section>
+
+      <footer class="pane-footer">
+        <small>Powered by <strong>EarthlyTrack.ng</strong> — Climate insights made simple, for a sustainable future.</small>
+      </footer>
+    </aside>
+  </main>
+
+  <!-- Modal: Manual energy input -->
+  <div id="modalManual" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-inner">
+      <h4>Manual energy reading</h4>
+      <label>kWh: <input id="manualKwh" type="number" step="0.01" /></label>
+      <label>Date/time: <input id="manualTime" type="datetime-local" /></label>
+      <div class="modal-actions">
+        <button id="saveManual" class="btn">Save</button>
+        <button id="cancelManual" class="btn alt">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

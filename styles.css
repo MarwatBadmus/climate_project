@@ -1,0 +1,246 @@
+/* =========================
+   EarthlyTrack.ng Styles
+   ========================= */
+
+/* Root colors */
+:root {
+  --green: #1b7a41;
+  --green-light: #27ae60;
+  --blue: #2c3e50;
+  --blue-light: #3498db;
+  --bg: #f5f9f6;
+  --card-bg: #ffffff;
+  --text: #2c3e50;
+  --muted: #6c757d;
+  --danger: #e74c3c;
+
+ /* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121212;
+    --color-text: #f0f0f0;
+    --color-primary: #57d9a3;
+    --color-secondary: #4dabf7;
+    --color-accent: #ffb86b;
+    --color-card: #1e1e1e;
+    --color-border: #333333;
+  }
+}
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--green);
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.topbar .brand h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.topbar .brand .dot {
+  color: var(--blue-light);
+}
+
+.topbar .tag {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-top: 0.2rem;
+}
+
+.top-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input {
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.btn {
+  background: var(--blue-light);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--blue);
+}
+
+.btn.alt {
+  background: white;
+  color: var(--blue);
+  border: 1px solid var(--blue-light);
+}
+
+.btn.alt:hover {
+  background: var(--blue-light);
+  color: white;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  flex: 1;
+}
+
+.pane {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1rem;
+}
+
+.map-placeholder {
+  background: #eef5f0;
+  border: 2px dashed var(--green-light);
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ind-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ind-item {
+  text-align: center;
+}
+
+.ind-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--green);
+}
+
+/* Energy tips */
+.energy-tips {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-left: 4px solid var(--blue-light);
+  background: #ecf9f3;
+  border-radius: 6px;
+}
+
+/* Habits */
+.habit-list {
+  list-style: none;
+  margin: 0.5rem 0;
+}
+
+.habit-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.habit-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.alert {
+  background: #f8f9fa;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.alert.empty {
+  color: var(--muted);
+}
+
+/* Footer */
+.pane-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 1rem;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-inner {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark mode */
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+body.dark .pane,
+body.dark .card,
+body.dark .modal-inner {
+  background: var(--card-dark);
+}
+
+body.dark .pane-footer {
+  color: var(--muted-dark);
+}
